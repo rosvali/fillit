@@ -38,6 +38,9 @@ int		main(int argc, char **argv)
 	map = ft_read_file(fd);
 	printf("ft_checkmaps retourne : %d\n", ft_check_maps(map));
 	printf("ft_checkblocs retourne : %d\n", ft_check_blocs(map));
+	printf("ft_count_maps retourne : %d\n", ft_count_maps(map));
+	map = ft_put_splitter(map);
 	printf("ft_check_all_co_maps retourne : %d\n", ft_check_all_co_maps(map));
+	printf("ft_put_splitter retourne : %s", ft_put_splitter(map));
 	return (0);
 }
