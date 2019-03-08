@@ -25,13 +25,14 @@ int		ft_count_maps(char *buff)
 	{
 		if (buff[i] == '\n')
 			count++;
-		if (count == 4)
+		if (count == 5)
 		{
 			maps++;
 			count = 0;
 		}
 		i++;
 	}
+	maps++;
 	return (maps);
 }
 
@@ -76,16 +77,7 @@ int		ft_check_all_co_maps(char *buff)
 	i = 0;
 	while (y < map)
 	{
-		str = ft_strsub(buff, i, 20);
-		if (ft_check_connection_blocs(str) == 0)
-			return (0);
-		else
-		{
-			ft_strclr(str);
-			free(str);
-			i = i + 20;
-			y++;
-		}
+		if ()
 	}
 	return (1);
 }
