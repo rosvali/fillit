@@ -6,7 +6,7 @@
 /*   By: raguillo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 14:13:09 by raguillo          #+#    #+#             */
-/*   Updated: 2019/03/07 16:08:11 by raguillo         ###   ########.fr       */
+/*   Updated: 2019/03/08 18:06:24 by raguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
+
+typedef struct		s_tetro
+{
+	char			**map;
+	struct s_tetro	*next;
+}					t_tetro;
+
+/* Fonctions qui check la validité du fichier */
 
 char	*ft_read_file(int fd);
 
@@ -37,5 +45,9 @@ int		ft_check_connection_blocs(char *buff);
 void	ft_check_connection_blocs_2(char **tab, int *x, int *y, int *count);
 
 int		ft_check_all_co_maps(char *buff);
+
+/* Fonctions qui vont permettre le stockage des tetriminoes */
+
+char	*ft_put_splitter(char *buff);
 
 #endif
