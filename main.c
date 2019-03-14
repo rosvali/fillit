@@ -6,33 +6,12 @@
 /*   By: raguillo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 14:02:31 by raguillo          #+#    #+#             */
-/*   Updated: 2019/03/07 16:06:45 by raguillo         ###   ########.fr       */
+/*   Updated: 2019/03/13 18:22:31 by raguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "fillit.h"
-
-char	*ft_read_file(int fd)
-{
-	int				ret;
-	static char		buff[BUFF_SIZE + 1];
-
-	while ((ret = read(fd, buff, BUFF_SIZE)) != 0)
-		buff[ret] = '\0';
-	return (buff);
-}
-
-int		ft_check_file(char *buff)
-{
-	if (ft_check_maps(buff) == 0)
-		return (0);
-	if (ft_check_blocs(buff) == 0)
-		return (0);
-	if (ft_check_all_co_maps(buff) == 0)
-		return (0);
-	return (1);
-}
 
 int		main(int argc, char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: raguillo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 14:12:47 by raguillo          #+#    #+#             */
-/*   Updated: 2019/03/07 16:08:14 by raguillo         ###   ########.fr       */
+/*   Updated: 2019/03/12 14:15:22 by raguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,45 @@ int		ft_check_all_co_maps(char *buff)
 {
 	int		map;
 	int		y;
-	char	*str;
 	int		i;
+	char	*str;
 
 	map = ft_count_maps(buff);
 	y = 0;
 	i = 0;
 	while (y < map)
 	{
-		if ()
+		str = ft_strsub(buff, i, 20);
+		if (ft_check_connection_blocs(str) == 0)
+			return (0);
+		else
+		{
+			ft_strclr(str);
+			free(str);
+			i = i + 21;
+			y++;
+		}
 	}
+	return (1);
+}
+
+char	*ft_read_file(int fd)
+{
+	int				ret;
+	static char		buff[BUFF_SIZE + 1];
+
+	while ((ret = read(fd, buff, BUFF_SIZE)) != 0)
+		buff[ret] = '\0';
+	return (buff);
+}
+
+int		ft_check_file(char *buff)
+{
+	if (ft_check_maps(buff) == 0)
+		return (0);
+	if (ft_check_blocs(buff) == 0)
+		return (0);
+	if (ft_check_all_co_maps(buff) == 0)
+		return (0);
 	return (1);
 }

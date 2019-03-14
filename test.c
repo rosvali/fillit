@@ -24,11 +24,27 @@ char	*ft_read_file(int fd)
 	return (buff);
 }
 
+// void	ft_print_list(t_tetro *t)
+// {
+// 	while (t)
+// 	{
+// 		t->map;
+// 		printtab(map);
+// 		t->next->map;
+// 	}
+// }
+
 int		main(int argc, char **argv)
 {
 	int				fd;
 	char			*map;
+	// int			start;
+	// int			i;
+	// t_tetro			*t;
+	// char			**tab;
 
+	// i = 0;
+	// t = NULL;
 	fd = open(argv[1], O_RDONLY);
 	if (argc != 2)
 	{
@@ -36,11 +52,20 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	map = ft_read_file(fd);
-	printf("ft_checkmaps retourne : %d\n", ft_check_maps(map));
-	printf("ft_checkblocs retourne : %d\n", ft_check_blocs(map));
+	// printf("ft_checkmaps retourne : %d\n", ft_check_maps(map));
+	// printf("ft_checkblocs retourne : %d\n", ft_check_blocs(map));
 	printf("ft_count_maps retourne : %d\n", ft_count_maps(map));
-	map = ft_put_splitter(map);
-	printf("ft_check_all_co_maps retourne : %d\n", ft_check_all_co_maps(map));
-	printf("ft_put_splitter retourne : %s", ft_put_splitter(map));
+	// printf("ft_check_connection_blocs : %d\n", ft_check_connection_blocs(map));
+	// printf("ft_check_all_co_maps retourne : %d\n", ft_check_all_co_maps(map));
+	// printf("ft_put_splitter retourne : %s", ft_put_splitter(map));*/
+	// while ((i - 1) < ft_count_maps(map))
+	// {
+	// 	ft_printtab(ft_put_map_in_tab(map, start));
+	// 	start = start + 21;
+	// 	i++;
+	// }
+	// t = ft_create_tetro(map);
+	// ft_print_list(t, tab);
+	ft_create_tetro(map);
 	return (0);
 }
