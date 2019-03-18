@@ -6,25 +6,11 @@
 /*   By: raguillo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 18:08:23 by raguillo          #+#    #+#             */
-/*   Updated: 2019/03/08 18:08:25 by raguillo         ###   ########.fr       */
+/*   Updated: 2019/03/18 17:43:30 by raguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-char		*ft_put_splitter(char *buff)
-{
-	int i;
-
-	i = 0;
-	while (buff[i] != '\0')
-	{
-		if (buff[i] == '\n' && buff[i - 1] == '\n')
-			buff[i] = '3';
-		i++;
-	}
-	return (buff);
-}
 
 char		**ft_put_map_in_tab(char *buff, int start)
 {
@@ -32,46 +18,47 @@ char		**ft_put_map_in_tab(char *buff, int start)
 	char	**tab;
 
 	str = ft_strsub(buff, start, 20);
-
 	tab = ft_strsplit(str, '\n');
 	return (tab);
 }
 
-t_tetro		*ft_create_tetro(char *buff)
+void		ft_lstadd_tetro(t_tetro **alst, t_tetro *new)
 {
-	int		start;
-	int		i;
+	if (new && alst)
+	{
+		new->next = *alst;
+		*alst = new;
+	}
+}
+
+t_tetro		*ft_lstnew_tetro(char *buff, int len)
+{
+	t_tetro	*tetro;
+
+	if (!(tetro = malloc(sizeof(t_tetro))))
+		return (NULL);
+	else
+		tetro->map = ft_put_map_in_tab(buff, len);
+	tetro->next = NULL;
+	return (tetro);
+}
+
+t_tetro		*ft_put_tab_in_list(char *buff)
+{
+	int		len;
+	t_tetro	*new;
 	t_tetro	*t;
-	t_tetro	*tmp;
-	char	**tab;
 
 	t = NULL;
-	start = 0;
-	i = 0;
-	while (i < (ft_count_maps(buff) - 1))
-	{
-		printf("i = %d\n", i);
-		printf("start = %d\n", start);
-		tab = ft_put_map_in_tab(buff, start);
-		start += 21;
-		i++;
-		if (!(t = malloc(sizeof(t_tetro))))
-		{
-			ft_lstdel(t);
-			return (NULL);
-		}
-		t->map = tab;
-		ft_printtab(t->map);
-		t->next = t;
-	}
-	printf("start = %d\n", start);
-	ft_put_map_in_tab(buff, start);
-	start = start + 20;
-	printf("%d\n", start);
-	if (!(t = malloc(sizeof(t_tetro))))
-		return (NULL);
-	t->map = tab;
-	ft_printtab(t->map);
+	len = 21 * (ft_count_maps(buff) - 1);
+	t = ft_lstnew_tetro(buff, len);
 	t->next = NULL;
+	len -= 21;
+	while (len >= 0)
+	{
+		new = ft_lstnew_tetro(buff, len);
+		ft_lstadd_tetro(&t, new);
+		len -= 21;
+	}
 	return (t);
 }

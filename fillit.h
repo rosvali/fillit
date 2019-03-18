@@ -18,7 +18,6 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 # include <stdlib.h>
-# include <stdio.h>
 
 typedef struct		s_tetro
 {
@@ -26,32 +25,46 @@ typedef struct		s_tetro
 	struct s_tetro	*next;
 }					t_tetro;
 
-/* Fonctions qui check la validité du fichier */
+/*
+** Fonctions qui check la validité du fichier
+*/
 
-char		*ft_read_file(int fd);
+char				*ft_read_file(int fd);
 
-int			ft_check_file(char *buff);
+int					ft_check_file(char *buff);
 
-int			ft_check_maps(char *buff);
+int					ft_check_maps(char *buff);
 
-int			ft_check_maps_2(char *buff, int *i, int *x, int *y);
+int					ft_check_maps_2(char *buff, int *i, int *x, int *y);
 
-int			ft_count_maps(char *buff);
+int					ft_count_maps(char *buff);
 
-int			ft_check_blocs(char *buff);
+int					ft_check_blocs(char *buff);
 
-int			ft_check_connection_blocs(char *buff);
+int					ft_check_connection_blocs(char *buff);
 
-void		ft_check_connection_blocs_2(char **tab, int *x, int *y, int *count);
+void				ft_check_connection_blocs_2(char **tab, int *x, int *y,
+					int *count);
 
-int			ft_check_all_co_maps(char *buff);
+int					ft_check_all_co_maps(char *buff);
 
-/* Fonctions qui vont permettre le stockage des tetriminoes */
+/*
+** Fonctions de stockage des tetrominoes
+*/
 
-char		*ft_put_splitter(char *buff);
+char				**ft_put_map_in_tab(char *buff, int start);
 
-char		**ft_put_map_in_tab(char *buff, int start);
+t_tetro				*ft_put_tab_in_list(char *buff);
 
-t_tetro		*ft_create_tetro(char *buff);
+void				ft_lstadd_tetro(t_tetro **alst, t_tetro *new);
 
+t_tetro				*ft_lstnew_tetro(char *buff, int len);
+
+/*
+** Fonctions d'affichage
+*/
+
+// void				ft_print_put_map_in_tab(char *map);
+
+// void				ft_print_create_tetro(t_tetro *t);
 #endif
