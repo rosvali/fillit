@@ -12,7 +12,7 @@
 
 NAME = fillit
 
-SRCS = main.c\
+SRCS = test.c\
 		checkfile.c\
 		checkfile_2.c\
 		stock_tetro.c

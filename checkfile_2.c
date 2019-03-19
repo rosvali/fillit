@@ -20,7 +20,7 @@ int		ft_check_maps_2(char *buff, int *i, int *x, int *y)
 		*y = *y + 1;
 		*i = *i + 1;
 	}
-	else if (buff[*i] == '\0')
+	else if (buff[*i] == '\0' && *x == 4)
 		return (1);
 	else
 		return (0);
@@ -71,7 +71,7 @@ int		ft_check_maps(char *buff)
 	y = 0;
 	while (buff[i] != '\0')
 	{
-		while (x < 4 && buff[i] != '\0')
+		while (buff[i] != '\0' && x < 4)
 		{
 			if (buff[i] != '.' && buff[i] != '#')
 				return (0);

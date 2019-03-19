@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* ******************************** ****************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
@@ -21,12 +21,13 @@
 
 typedef struct		s_tetro
 {
-	char			**map;
+	char			*map;
 	struct s_tetro	*next;
 }					t_tetro;
 
 /*
 ** Fonctions qui check la validité du fichier
+** checkfile.c checkfile_2.c
 */
 
 char				*ft_read_file(int fd);
@@ -50,9 +51,10 @@ int					ft_check_all_co_maps(char *buff);
 
 /*
 ** Fonctions de stockage des tetrominoes
+** stock_tetro.c
 */
 
-char				**ft_put_map_in_tab(char *buff, int start);
+char				*ft_put_map_in_tab(char *buff, int start);
 
 t_tetro				*ft_put_tab_in_list(char *buff);
 
@@ -61,10 +63,17 @@ void				ft_lstadd_tetro(t_tetro **alst, t_tetro *new);
 t_tetro				*ft_lstnew_tetro(char *buff, int len);
 
 /*
-** Fonctions d'affichage
+** Fonctions du backtracking
 */
 
-// void				ft_print_put_map_in_tab(char *map);
+char				**ft_create_final_tab(int len);
 
-// void				ft_print_create_tetro(t_tetro *t);
+/*
+** Fonctions d'affichage
+** test.c
+*/
+
+void				ft_print_put_map_in_tab(char *map);
+
+void				ft_print_create_tetro(t_tetro *t);
 #endif

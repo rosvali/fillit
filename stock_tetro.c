@@ -11,15 +11,14 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
-char		**ft_put_map_in_tab(char *buff, int start)
+char		*ft_put_map_in_tab(char *buff, int start)
 {
 	char	*str;
-	char	**tab;
 
 	str = ft_strsub(buff, start, 20);
-	tab = ft_strsplit(str, '\n');
-	return (tab);
+	return (str);
 }
 
 void		ft_lstadd_tetro(t_tetro **alst, t_tetro *new)

@@ -20,31 +20,24 @@ int		main(int argc, char **argv)
 	char	*buff;
 	t_tetro *tetro;
 
-	printf("%d\n", argc);
-	if (argc == 1 || argc > 2)
+	if (argc != 2)
 	{
-		write(1, "usage: ./fillit source_file.fillit\n", 50);
+		write(1, "usage: ./fillit source_file.fillit\n", 35);
 		return (0);
 	}
-	else
+	fd = open(argv[1], O_RDONLY);
+	buff = ft_read_file(fd);
+	if (ft_check_file(buff) == 0)
 	{
 		write (1, "error\n", 6);
-		fd = open(argv[1], O_RDONLY);
-		buff = ft_read_file(fd);
-		if (ft_check_file(buff) == 0)
-		{
-			// write (1, "error\n", 6);
-			return (0);
-		}
-		tetro = ft_put_tab_in_list(buff);
-		// write (1, "error\n", 6);
-		while (tetro)
-		{
-			// write (1, "error\n", 6);
-			ft_printtab(tetro->map);
-			tetro = tetro->next;
-		}
-		close(fd);
 		return (0);
-	}	
+	}
+	tetro = ft_put_tab_in_list(buff);
+	while (tetro)
+	{
+		ft_printtab(tetro->map);
+		tetro = tetro->next;
+	}
+	close(fd);
+	return (0);
 }

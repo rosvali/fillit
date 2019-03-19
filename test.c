@@ -23,7 +23,7 @@ void	ft_print_put_map_in_tab(char *map)
 	start = 0;
 	while (i < ft_count_maps(map))
 	{
-		ft_printtab(ft_put_map_in_tab(map, start));
+		ft_putstr(ft_put_map_in_tab(map, start));
 		start += 21;
 		i++;
 	}
@@ -33,8 +33,7 @@ void	ft_print_create_tetro(t_tetro *t)
 {
 	while (t)
 	{
-		ft_printtab(t->map);
-		printf("ok");
+		ft_putstr(t->map);
 		t = t->next;
 	}
 }
@@ -43,11 +42,13 @@ int		main(int argc, char **argv)
 {
 	int			fd;
 	char		*map;
+	int 		i;
 	t_tetro		*t;
 
+	i = argc;
 	fd = open(argv[1], O_RDONLY);
 	map = ft_read_file(fd);
-	printf("ft_count_maps retourne : %d\n", ft_count_maps(map));
+	//printf("ft_count_maps retourne : %d\n", ft_count_maps(map));
 
 /* Fonctions qui check la validité du fichier */
 
@@ -61,5 +62,10 @@ int		main(int argc, char **argv)
 	//ft_print_put_map_in_tab(map);
 	t = ft_put_tab_in_list(map);
 	ft_print_create_tetro(t);
+
+/* Fonctions du backtracking */
+
+	// tab = ft_create_final_tab(2);
+	// ft_printtab(tab);
 	return (0);
 }
