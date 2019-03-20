@@ -29,7 +29,7 @@ int		main(int argc, char **argv)
 	buff = ft_read_file(fd);
 	if (ft_check_file(buff) == 0)
 	{
-		write (1, "error\n", 6);
+		write(1, "error\n", 6);
 		return (0);
 	}
 	tetro = ft_put_tab_in_list(buff);

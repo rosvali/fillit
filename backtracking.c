@@ -10,46 +10,47 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fillit.h>
+#include "fillit.h"
+#include <stdio.h>
 
-char	**ft_create_final_tab(int len)
+int		*ft_blocs_coords(char *str)
 {
-	int		i;
-	int		j;
-	char	**tab;
+	int i;
+	int j;
+	int *tab;
 
 	i = 0;
 	j = 0;
-	tab = malloc(sizeof(char *)* len + 1);
-	while (j < len)
+	if (!(tab = malloc(sizeof(char) * 4)))
+		return (NULL);
+	while (str[i] != '\0')
 	{
-		tab[j] = malloc(sizeof(char)* len + 1);
-		while (i < len)
+		if (str[i] == '#')
 		{
-			tab[j][i] = '.';
-			i++;
+			tab[j] = i;
+			printf("%d\n", tab[j]);
+			j++;
 		}
-		tab[j][i] = '\0';
-		j++;
-		i = 0;
+		i++;
 	}
-	tab[j] = 0;
 	return (tab);
 }
 
-char	**ft_place_tetro(t_tetro *t)
-{
-	int		i;
+// char	*ft_place_tetro_in_str(char *map, char *str, char c)
+// {
+// 	int 	i;
+// 	int		count;
 
-	i = 0;
-	while (t->map)
-	{
-		
-	}
-}
-
-int		ft_checkcanplace(char **tab)
-{
-
-	if tab
-}
+// 	i = 0;
+// 	count = 0;
+// 	while (count < 4)
+// 	{
+// 		while (map[i] != '\n' && str[i] != '\n')
+// 		{
+// 			if (map[i] == '#' && str[i] != '.')
+// 				str[i] = c;
+// 			else
+// 				//effacer le tetro
+// 		}
+// 	}
+// }

@@ -15,7 +15,8 @@ NAME = fillit
 SRCS = test.c\
 		checkfile.c\
 		checkfile_2.c\
-		stock_tetro.c
+		stock_tetro.c\
+		backtracking.c
 
 OBJECTS = $(SRCS:.c=.o)
 

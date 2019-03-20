@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
-char		*ft_put_map_in_tab(char *buff, int start)
+char		*ft_put_map_in_str(char *buff, int start)
 {
 	char	*str;
 
@@ -37,12 +36,12 @@ t_tetro		*ft_lstnew_tetro(char *buff, int len)
 	if (!(tetro = malloc(sizeof(t_tetro))))
 		return (NULL);
 	else
-		tetro->map = ft_put_map_in_tab(buff, len);
+		tetro->map = ft_put_map_in_str(buff, len);
 	tetro->next = NULL;
 	return (tetro);
 }
 
-t_tetro		*ft_put_tab_in_list(char *buff)
+t_tetro		*ft_put_str_in_list(char *buff)
 {
 	int		len;
 	t_tetro	*new;

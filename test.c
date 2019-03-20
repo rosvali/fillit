@@ -14,7 +14,7 @@
 #include "fillit.h"
 #include <stdio.h>
 
-void	ft_print_put_map_in_tab(char *map)
+void	ft_print_put_map_in_str(char *map)
 {
 	int		i;
 	int		start;
@@ -23,7 +23,7 @@ void	ft_print_put_map_in_tab(char *map)
 	start = 0;
 	while (i < ft_count_maps(map))
 	{
-		ft_putstr(ft_put_map_in_tab(map, start));
+		ft_putstr(ft_put_map_in_str(map, start));
 		start += 21;
 		i++;
 	}
@@ -60,12 +60,13 @@ int		main(int argc, char **argv)
 /* Fonctions qui vont permettre le stockage des tetriminoes */
 
 	//ft_print_put_map_in_tab(map);
-	t = ft_put_tab_in_list(map);
-	ft_print_create_tetro(t);
+	//ft_print_put_map_in_tab(map);
+	t = ft_put_str_in_list(map);
+	// ft_print_create_tetro(t);
 
 /* Fonctions du backtracking */
 
-	// tab = ft_create_final_tab(2);
-	// ft_printtab(tab);
+	//ft_print_put_map_in_tab(map);
+	ft_blocs_coords(t->map);
 	return (0);
 }

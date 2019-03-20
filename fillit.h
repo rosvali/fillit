@@ -1,4 +1,4 @@
-/* ******************************** ****************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
@@ -54,9 +54,9 @@ int					ft_check_all_co_maps(char *buff);
 ** stock_tetro.c
 */
 
-char				*ft_put_map_in_tab(char *buff, int start);
+char				*ft_put_map_in_str(char *buff, int start);
 
-t_tetro				*ft_put_tab_in_list(char *buff);
+t_tetro				*ft_put_str_in_list(char *buff);
 
 void				ft_lstadd_tetro(t_tetro **alst, t_tetro *new);
 
@@ -64,16 +64,21 @@ t_tetro				*ft_lstnew_tetro(char *buff, int len);
 
 /*
 ** Fonctions du backtracking
+** backtracking.c
 */
 
-char				**ft_create_final_tab(int len);
+char				*ft_put_tetro_start(char *str, int j);
+
+char				*ft_put_tetro_start_2(char *str, int j);
+
+int				*ft_blocs_coords(char *str);
 
 /*
 ** Fonctions d'affichage
 ** test.c
 */
 
-void				ft_print_put_map_in_tab(char *map);
+void				ft_print_put_map_in_str(char *map);
 
 void				ft_print_create_tetro(t_tetro *t);
 #endif
