@@ -48,7 +48,7 @@ int		main(int argc, char **argv)
 	i = argc;
 	fd = open(argv[1], O_RDONLY);
 	map = ft_read_file(fd);
-	//printf("ft_count_maps retourne : %d\n", ft_count_maps(map));
+	printf("ft_count_maps retourne : %d\n", ft_count_maps(map));
 
 /* Fonctions qui check la validité du fichier */
 
@@ -59,14 +59,10 @@ int		main(int argc, char **argv)
 
 /* Fonctions qui vont permettre le stockage des tetriminoes */
 
-	//ft_print_put_map_in_tab(map);
-	//ft_print_put_map_in_tab(map);
+	//ft_print_put_map_in_str(map);
 	t = ft_put_str_in_list(map);
-	// ft_print_create_tetro(t);
+	ft_print_create_tetro(t);
 
 /* Fonctions du backtracking */
-
-	//ft_print_put_map_in_tab(map);
-	ft_blocs_coords(t->map);
 	return (0);
 }

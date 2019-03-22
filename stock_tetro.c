@@ -16,7 +16,11 @@ char		*ft_put_map_in_str(char *buff, int start)
 {
 	char	*str;
 
-	str = ft_strsub(buff, start, 20);
+	str = ft_strsub(buff, start, 19);
+
+	str = delete_nl(str);
+	tetro_shift_top(str);
+	tetro_shift_left(str);
 	return (str);
 }
 
@@ -35,28 +39,27 @@ t_tetro		*ft_lstnew_tetro(char *buff, int len)
 
 	if (!(tetro = malloc(sizeof(t_tetro))))
 		return (NULL);
-	else
-		tetro->map = ft_put_map_in_str(buff, len);
+	tetro->map = ft_put_map_in_str(buff, len);
 	tetro->next = NULL;
 	return (tetro);
 }
 
 t_tetro		*ft_put_str_in_list(char *buff)
 {
-	int		len;
+	int		start;
 	t_tetro	*new;
 	t_tetro	*t;
 
 	t = NULL;
-	len = 21 * (ft_count_maps(buff) - 1);
-	t = ft_lstnew_tetro(buff, len);
+	start = 21 * (ft_count_maps(buff) - 1);
+	t = ft_lstnew_tetro(buff, start);
 	t->next = NULL;
-	len -= 21;
-	while (len >= 0)
+	start -= 21;
+	while (start >= 0)
 	{
-		new = ft_lstnew_tetro(buff, len);
+		new = ft_lstnew_tetro(buff, start);
 		ft_lstadd_tetro(&t, new);
-		len -= 21;
+		start -= 21;
 	}
 	return (t);
 }

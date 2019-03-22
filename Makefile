@@ -12,11 +12,12 @@
 
 NAME = fillit
 
-SRCS = test.c\
+SRCS = main.c\
 		checkfile.c\
 		checkfile_2.c\
 		stock_tetro.c\
-		backtracking.c
+		backtracking.c\
+		final_tab.c
 
 OBJECTS = $(SRCS:.c=.o)
 

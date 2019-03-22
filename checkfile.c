@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "fillit.h"
 
 int		ft_count_maps(char *buff)

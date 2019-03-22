@@ -19,6 +19,7 @@ int		main(int argc, char **argv)
 	int		fd;
 	char	*buff;
 	t_tetro *tetro;
+	char	*tab;
 
 	if (argc != 2)
 	{
@@ -32,12 +33,9 @@ int		main(int argc, char **argv)
 		write(1, "error\n", 6);
 		return (0);
 	}
-	tetro = ft_put_tab_in_list(buff);
-	while (tetro)
-	{
-		ft_printtab(tetro->map);
-		tetro = tetro->next;
-	}
+	tetro = ft_put_str_in_list(buff);
+	tab = grow_and_solve(tetro);
+	ft_putstr(tab);
 	close(fd);
 	return (0);
 }

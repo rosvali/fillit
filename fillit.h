@@ -67,11 +67,31 @@ t_tetro				*ft_lstnew_tetro(char *buff, int len);
 ** backtracking.c
 */
 
-char				*ft_put_tetro_start(char *str, int j);
+char				*ft_put_tetro_start(char *str, int start);
 
-char				*ft_put_tetro_start_2(char *str, int j);
+char				*ft_put_tetro(char *str, int start);
 
-int				*ft_blocs_coords(char *str);
+char				*delete_nl(char *map);
+
+char				*create_final_tab(int *count);
+
+void				tetro_shift(char *piece, size_t n);
+
+void				tetro_shift_left(char *piece);
+
+void				tetro_shift_top(char *piece);
+
+char				*create_final_tab(int *count);
+
+char				*delete_nl(char *map);
+
+char				*grow_and_solve(t_tetro *t);
+
+int					can_place(char *map, char *tab, int i);
+
+void				place(char *map, char *tab, char c, int i);
+
+int					backtracking(t_tetro *t, char c, char *tab);
 
 /*
 ** Fonctions d'affichage
