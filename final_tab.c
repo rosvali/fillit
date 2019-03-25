@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   final_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kwatanab <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 15:42:44 by kwatanab          #+#    #+#             */
-/*   Updated: 2019/03/21 16:54:18 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/03/25 18:39:16 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 char	*create_final_tab(int *count)
 {
@@ -22,7 +23,7 @@ char	*create_final_tab(int *count)
 		*count = *count + 1;
 	if (!(tab = malloc(sizeof(char) * (*count + 1))))
 		return (0);
-	while (i < (*count + 1))
+	while (i < *count)
 	{
 		tab[i] = '.';
 		i++;
@@ -54,4 +55,14 @@ char	*delete_nl(char *map)
 	}
 	new_map[j] = '\0';
 	return (new_map);
+}
+
+size_t		ft_len(char *tab)
+{
+	size_t len;
+
+	len = ft_strlen(tab);
+	// printf("len dans ft_len = %zu\n", len);
+	len = ft_sqrt(len);
+	return (len);
 }

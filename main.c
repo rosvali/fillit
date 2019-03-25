@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raguillo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 14:02:31 by raguillo          #+#    #+#             */
-/*   Updated: 2019/03/13 18:22:31 by raguillo         ###   ########.fr       */
+/*   Updated: 2019/03/25 18:37:08 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ int		main(int argc, char **argv)
 	char	*buff;
 	t_tetro *tetro;
 	char	*tab;
+	size_t	len;
+	int		i;
+	int		j;
 
 	if (argc != 2)
 	{
@@ -35,7 +38,21 @@ int		main(int argc, char **argv)
 	}
 	tetro = ft_put_str_in_list(buff);
 	tab = grow_and_solve(tetro);
-	ft_putstr(tab);
+	len = ft_len(tab);
+	j = 0;
+	i = 0;
+	while (tab[i] != '\0')
+	{
+		ft_putchar(tab[i]);
+		i++;
+		j++;
+		if (j == (int)len)
+		{
+			
+			ft_putchar('\n');
+			j = 0;
+		}
+	}
 	close(fd);
 	return (0);
 }

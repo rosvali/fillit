@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raguillo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 14:13:09 by raguillo          #+#    #+#             */
-/*   Updated: 2019/03/08 18:06:24 by raguillo         ###   ########.fr       */
+/*   Updated: 2019/03/25 18:02:49 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int					can_place(char *map, char *tab, int i);
 void				place(char *map, char *tab, char c, int i);
 
 int					backtracking(t_tetro *t, char c, char *tab);
+
+size_t				ft_len(char *tab);
 
 /*
 ** Fonctions d'affichage

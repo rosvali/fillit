@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backtracking.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raguillo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 13:49:01 by raguillo          #+#    #+#             */
-/*   Updated: 2019/03/19 13:49:40 by raguillo         ###   ########.fr       */
+/*   Updated: 2019/03/25 20:03:07 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*grow_and_solve(t_tetro *t)
 {
 	char	*tab;
 	char	c;
-	int 	count;
+	int		count;
 
 	c = 'A';
 	count = 4;
@@ -51,11 +51,11 @@ char	*grow_and_solve(t_tetro *t)
 		return (NULL);
 	while (backtracking(t, c, tab) == 0)
 	{
-		printf("ok1");
 		count++;
 		free(tab);
 		if (!(tab = create_final_tab(&count)))
 			return (NULL);
+		// printf("%d\n", count);
 	}
 	return (tab);
 }
@@ -67,15 +67,18 @@ int		can_place(char *map, char *tab, int i)
 
 	count = 0;
 	j = 0;
-	while (count < 3)
+	while (count < 4)
 	{
-		printf("ok2");
-		if (tab[i] == '.' && map[j] == '#')
-			count++;
-		else if (tab[i] != '.')
+		if (tab[i] == '\0' || map[j] == '\0')
+			return(0);
+		else if (tab[i] != '.' && map[j] == '#')
 			return (0);
-		i++;
-		j++;
+		else if (tab[i] == '.' && map[j] == '#')
+		{
+			count++;
+			i++;
+			j++;
+		}
 	}
 	return (1);
 }
@@ -87,16 +90,21 @@ void		place(char *map, char *tab, char c, int i)
 
 	j = 0;
 	count = 0;
-	while (count != 3)
+	while (tab[i] && count <= 4)
 	{
-		printf("ok3");
 		if (tab[i] == '.' && map[j] == '#')
 		{
 			tab[i] = c;
 			count++;
+			j++;
+			i++;
 		}
-		i++;
-		j++;
+		else
+		{
+			tab[i] = map[j];
+			i++;
+			j++;
+		}
 	}
 }
 
@@ -111,7 +119,6 @@ int		backtracking(t_tetro *t, char c, char *tab)
 		return (1);
 	while (tab[i])
 	{
-		printf("ok4 %i", i);
 		if (tab[i] == '.')
 		{
 			if (can_place(t->map, tab, i) == 1)
