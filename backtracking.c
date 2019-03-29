@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 13:49:01 by raguillo          #+#    #+#             */
-/*   Updated: 2019/03/27 19:36:14 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/03/29 17:57:10 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,105 +59,21 @@ char	*grow_and_solve(t_tetro *t)
 	return (tab);
 }
 
-// int	can_place(char *map, char *tab, int i)
-// {
-// 	int tab_size;
-// 	int tab_len;
-// 	int j;
-// 	int k;
-
-// 	tab_size = ft_strlen(tab);
-// 	tab_len = ft_sqrt(tab_size);
-// 	j = i;
-// 	k = 0;
-// 	while (k < 16)
-// 	{
-// 		if (map[k] == '#' && (((i % tab_len) + (k % 4) >= tab_len)
-// 			|| (j >= tab_size) || (tab[j] != '.')))
-// 			return (0);
-// 		if (tab_len > 4 && j && j % tab_len == 0)
-// 			j += tab_len - 4;
-// 		else
-// 			++j;
-// 		++k;
-// 	}
-// 	return (1);
-// }
-
-// void	place(char *map, char *tab, char c, int i)
-// {
-// 	int tab_size;
-// 	int tab_len;
-// 	int j;
-// 	int k;
-// 	int	spc;
-
-// 	tab_size = ft_strlen(tab);
-// 	tab_len = ft_sqrt(tab_size);
-// 	j = i;
-// 	spc = tab_len - 5;
-// 	k = 0;
-// 	while (k < 16)
-// 	{
-// 		if (map[k] == '#')
-// 			tab[j] = c;
-// 		if (tab_len != 4 && j && j % tab_len == 0)
-// 			j += tab_len - 4;
-// 		else 
-// 			++j;
-// 		++k;
-// 	}
-// }
-
 int		can_place(char *map, char *tab, int i)
 {
-	// int len;
-	// int def_len;
-	// int diff;
-	// int count;
-	// int j;
-	// int k;
-	
-	// len = (int)ft_len(tab);
-	// def_len = len;
-	// count = 0;
-	// j = 0;
-	// k = 0;
-	// if (len <= 4)
-	// 	diff = 4 - len;
-	// else
-	// 	diff = len - 4;
-	// while (k < def_len)
-	// {
-	// 	while (j < len)
-	// 	{
-	// 		if (tab[i] == '.' && map[j] == '#')
-	// 			count++;
-	// 		i++;
-	// 		j++;
-	// 	}
-	// 	j += diff;
-	// 	len += diff + len;
-	// 	k++;
-	// }
-	// if (count == 4)
-	// 	return (1);
-	// return (0);
+	int		len;
+	int		def_len;
+	int		diff;
+	int		count;
+	int		j;
+	int		k;
 
-	int len;
-	int def_len;
-	int diff;
-	int count;
-	int j;
-	int k;
-
-	len = (int)ft_len(tab);
+	len = (int)tab_len(tab);
 	def_len = len;
 	count = 0;
 	j = 0;
 	k = 0;
-	if (len <= 4)
-		diff = 4 - len;
+	diff = 4 - len;
 	while (k < def_len && len <= 16)
 	{
 		while (j < len)
@@ -167,112 +83,179 @@ int		can_place(char *map, char *tab, int i)
 				if ((i + 1) % def_len == 0 && map[j + 1] == '#')
 					return (0);
 				count++;
+				if (count == 4)
+					return (1);
 			}
 			i++;
 			j++;
 		}
-		j+= diff;
+		j += diff;
 		len += diff + len;
 		k++;
+	}
+	return (0);
+}
+
+void	place(char *map, char *tab, char c, int i)
+{
+	int		len;
+	int		def_len;
+	int		diff;
+	int		j;
+	int		k;
+
+	len = (int)tab_len(tab);
+	def_len = len;
+	j = 0;
+	k = 0;
+	diff = 4 - len;
+	while (k < def_len && len <= 16)
+	{
+		while (j < len)
+		{
+			if (tab[i] == '.' && map[j] == '#')
+				tab[i] = c;
+			i++;
+			j++;
+		}
+		j += diff;
+		len += diff + len;
+		k++;
+	}
+}
+
+void	place_del(char *map, char *tab, char c, int i)
+{
+	int		len;
+	int		def_len;
+	int		diff;
+	int		j;
+	int		k;
+
+	len = (int)tab_len(tab);
+	def_len = len;
+	j = 0;
+	k = 0;
+	diff = 4 - len;
+	while (k < def_len && len <= 16)
+	{
+		while (j < len)
+		{
+			if (tab[i] != '.' && map[j] == '#')
+				tab[i] = c;
+			i++;
+			j++;
+		}
+		j += diff;
+		len += diff + len;
+		k++;
+	}
+}
+
+int		can_place_sup(char *map, char *tab, int i)
+{
+	int		len;
+	int		def_len;
+	int		diff;
+	int		count;
+	int		lim;
+	int		j;
+	int		k;
+
+	len = 4;
+	def_len = (int)tab_len(tab);
+	count = 0;
+	j = 0;
+	k = 0;
+	lim = 0;
+	diff = def_len - 4;
+	while (k < 4 && len <= (int)ft_strlen(tab))
+	{
+		while (lim < 4)
+		{
+			if (tab[i] == '.' && map[j] == '#')
+			{
+				if ((i + 1) % def_len == 0 && map[j + 1] == '#')
+					return (0);
+				count++;
+			}
+			i++;
+			j++;
+			lim++;
+		}
+		i += diff;
+		len += diff + len;
+		k++;
+		lim = 0;
 	}
 	if (count == 4)
 		return (1);
 	return (0);
 }
 
-void	place(char *map, char *tab, char c, int i)
+void	place_sup(char *map, char *tab, char c, int i)
 {
-	int len;
-	int def_len;
-	int diff;
-	int j;
-	int k;
-	
-	len = (int)ft_len(tab);
-	def_len = len;
+	int		len;
+	int		diff;
+	int		lim;
+	int		j;
+	int		k;
+
+	len = 4;
 	j = 0;
 	k = 0;
-	if (len <= 4)
+	lim = 0;
+	diff = (int)tab_len(tab) - 4;
+	while (k < 4 && len <= (int)ft_strlen(tab))
 	{
-		diff = 4 - len;
-		while (k < def_len && len <= 16)
+		while (lim < 4)
 		{
-			while (j < len)
-			{
-				if (tab[i] == '.' && map[j] == '#')
-					tab[i] = c;
-				i++;
-				j++;
-			}
-			j += diff;
-			len += diff + len;
-			k++;
+			if (tab[i] == '.' && map[j] == '#')
+				tab[i] = c;
+			i++;
+			j++;
+			lim++;
 		}
+		i += diff;
+		len += diff + len;
+		k++;
+		lim = 0;
 	}
 }
 
-// int		can_place(char *map, char *tab, int i)
-// {
-// 	int	count;
-// 	int	spc;
-// 	int j;
-// 	int	len;
+void	place_sup_del(char *map, char *tab, char c, int i)
+{
+	int		len;
+	int		diff;
+	int		lim;
+	int		j;
+	int		k;
 
-// 	len = ft_len(tab);
-// 	spc = len - 5;
-// 	count = 0;
-// 	j = 0;
-// 	while (count < 4)
-// 	{
-// 		if (tab[i] == '\0' || map[j] == '\0')
-// 			return (0);
-// 		if (tab[i] != '.' && map[j] == '#')
-// 			return (0);
-// 		while (tab[i] == '.' && map[j] == '#')
-// 		{
-// 			i++;
-// 			j++;
-// 			count++; 
-// 		}
-// 		j = j + 4 + (spc);
-// 		i = i + len + (spc);
-// 	}
-// 	return (1);
-// }
-
-// void	place(char *map, char *tab, char c, int i)
-// {
-// 	int 	j;
-// 	int 	count;
-// 	int		len;
-// 	int		spc;
-
-// 	j = 0;
-// 	count = 0;
-// 	len = (int)ft_len(tab);
-// 	spc = len - 5;
-// 	while (map[j] == '.')
-// 	{
-// 		j++;
-// 		i++;
-// 	}
-// 	while (map[j] && count < 4)
-// 	{
-// 		while (map[j] == '#')
-// 		{
-// 			tab[i] = c;
-// 			i++;
-// 			j++;
-// 			count++;
-// 		}
-// 		j = j + 4 + (spc);
-// 		i = i + len + (spc);
-// 	}
-// }
+	len = 4;
+	j = 0;
+	k = 0;
+	lim = 0;
+	diff = (int)tab_len(tab) - 4;
+	while (k < 4 && len <= (int)ft_strlen(tab))
+	{
+		while (lim < 4)
+		{
+			if (tab[i] != '.' && map[j] == '#')
+				tab[i] = c;
+			i++;
+			j++;
+			lim++;
+		}
+		i += diff;
+		len += diff + len;
+		k++;
+		lim = 0;
+	}
+}
 
 int		backtracking(t_tetro *t, char c, char *tab)
 {
-	int 	i;
+	int		i;
 
 	i = 0;
 	if (t == NULL)
@@ -281,13 +264,27 @@ int		backtracking(t_tetro *t, char c, char *tab)
 	{
 		if (tab[i] == '.')
 		{
-			if (can_place(t->map, tab, i) == 1)
+			if (ft_strlen(tab) <= 16)
 			{
-				place(t->map, tab, c, i);
-				if (backtracking(t->next, (c + 1), tab))
-					return (1);
-				else
-					place(t->map, tab, '.', i);
+				if (can_place(t->map, tab, i) == 1)
+				{
+					place(t->map, tab, c, i);
+					if (backtracking(t->next, (c + 1), tab))
+						return (1);
+					else
+						place_del(t->map, tab, '.', i);
+				}
+			}
+			else
+			{
+				if (can_place_sup(t->map, tab, i) == 1)
+				{
+					place_sup(t->map, tab, c, i);
+					if (backtracking(t->next, (c + 1), tab))
+						return (1);
+					else
+						place_sup_del(t->map, tab, '.', i);
+				}
 			}
 		}
 		i++;

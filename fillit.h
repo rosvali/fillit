@@ -26,54 +26,45 @@ typedef struct		s_tetro
 }					t_tetro;
 
 /*
-** Fonctions qui check la validité du fichier
+** Validité du fichier
 ** checkfile.c checkfile_2.c
 */
 
-char				*ft_read_file(int fd);
+char				*read_file(int fd);
 
-int					ft_check_file(char *buff);
+int					count_maps(char *buff);
 
-int					ft_check_maps(char *buff);
+int					checking(char *buff);
 
-int					ft_check_maps_2(char *buff, int *i, int *x, int *y);
+int					check_blocs(char *buff);
 
-int					ft_count_maps(char *buff);
+int					check_maps(char *buff);
 
-int					ft_check_blocs(char *buff);
+int					check_maps_next(char *buff, int *i, int *x, int *y);
 
-int					ft_check_connection_blocs(char *buff);
+int					split_maps(char *buff);
 
-void				ft_check_connection_blocs_2(char **tab, int *x, int *y,
-					int *count);
+int					check_tetro(char *buff);
 
-int					ft_check_all_co_maps(char *buff);
+void				check_tetro_next(char **tab, int *x, int *y, int *count);
 
 /*
-** Fonctions de stockage des tetrominoes
+** Stockage des maps
 ** stock_tetro.c
 */
 
-char				*ft_put_map_in_str(char *buff, int start);
+char				*split_and_move(char *buff, int start);
 
-t_tetro				*ft_put_str_in_list(char *buff);
+void				lstadd_tetro(t_tetro **alst, t_tetro *new);
 
-void				ft_lstadd_tetro(t_tetro **alst, t_tetro *new);
+t_tetro				*lstnew_tetro(char *buff, int len);
 
-t_tetro				*ft_lstnew_tetro(char *buff, int len);
+t_tetro				*create_tetro(char *buff);
 
 /*
 ** Fonctions du backtracking
 ** backtracking.c
 */
-
-char				*ft_put_tetro_start(char *str, int start);
-
-char				*ft_put_tetro(char *str, int start);
-
-char				*delete_nl(char *map);
-
-char				*create_final_tab(int *count);
 
 void				tetro_shift(char *piece, size_t n);
 
@@ -81,22 +72,33 @@ void				tetro_shift_left(char *piece);
 
 void				tetro_shift_top(char *piece);
 
-char				*create_final_tab(int *count);
-
-char				*delete_nl(char *map);
-
 char				*grow_and_solve(t_tetro *t);
 
 int					can_place(char *map, char *tab, int i);
 
+int					can_place_sup(char *map, char *tab, int i);
+
 void				place(char *map, char *tab, char c, int i);
+
+void				place_sup(char *map, char *tab, char c, int i);
 
 int					backtracking(t_tetro *t, char c, char *tab);
 
-size_t				ft_len(char *tab);
+/*
+** Création du tableau
+** final_tab.c
+*/
+
+char				*create_final_tab(int *count);
+
+char				*delete_nl(char *map);
+
+size_t				tab_len(char *tab);
+
+void				print_tab(char *tab, size_t len);
 
 /*
-** Fonctions d'affichage
+** Test
 ** test.c
 */
 

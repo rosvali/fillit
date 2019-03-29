@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-int		ft_check_maps_2(char *buff, int *i, int *x, int *y)
+int		check_maps_next(char *buff, int *i, int *x, int *y)
 {
 	if (buff[*i] == '\n' && buff[*i + 1] != '\0')
 	{
@@ -33,7 +33,7 @@ int		ft_check_maps_2(char *buff, int *i, int *x, int *y)
 	return (2);
 }
 
-void	ft_check_connection_blocs_2(char **tab, int *x, int *y, int *count)
+void	check_tetro_next(char **tab, int *x, int *y, int *count)
 {
 	if (tab[*y][*x] == '#')
 	{
@@ -60,7 +60,7 @@ void	ft_check_connection_blocs_2(char **tab, int *x, int *y, int *count)
 	}
 }
 
-int		ft_check_maps(char *buff)
+int		check_maps(char *buff)
 {
 	int		i;
 	int		x;
@@ -78,22 +78,23 @@ int		ft_check_maps(char *buff)
 			i++;
 			x++;
 		}
-		if (ft_check_maps_2(buff, &i, &x, &y) == 0)
+		if (check_maps_next(buff, &i, &x, &y) == 0)
 			return (0);
-		else if (ft_check_maps_2(buff, &i, &x, &y) == 1)
+		else if (check_maps_next(buff, &i, &x, &y) == 1)
 			return (1);
 	}
 	return (1);
 }
 
-int		ft_check_connection_blocs(char *buff)
+int		check_tetro(char *buff)
 {
 	char	**tab;
 	int		x;
 	int		y;
 	int		count;
 
-	tab = ft_strsplit(buff, '\n');
+	if (!(tab = ft_strsplit(buff, '\n')))
+		return (0);
 	x = 0;
 	y = 0;
 	count = 0;
@@ -101,7 +102,7 @@ int		ft_check_connection_blocs(char *buff)
 	{
 		while (tab[y][x] != '\0')
 		{
-			ft_check_connection_blocs_2(tab, &x, &y, &count);
+			check_tetro_next(tab, &x, &y, &count);
 			x++;
 		}
 		x = 0;

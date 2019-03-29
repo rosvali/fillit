@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 char	*create_final_tab(int *count)
 {
@@ -41,7 +40,7 @@ char	*delete_nl(char *map)
 	i = 0;
 	j = 0;
 	if (!(new_map = malloc(sizeof(char) * ((int)ft_strlen(map) - 3) + 1)))
-		return(NULL);
+		return (NULL);
 	while (map[i])
 	{
 		if (map[i] == '\n')
@@ -57,12 +56,31 @@ char	*delete_nl(char *map)
 	return (new_map);
 }
 
-size_t		ft_len(char *tab)
+size_t	tab_len(char *tab)
 {
 	size_t len;
 
 	len = ft_strlen(tab);
-	// printf("len dans ft_len = %zu\n", len);
 	len = ft_sqrt(len);
 	return (len);
+}
+
+void	print_tab(char *tab, size_t len)
+{
+	int		j;
+	int		i;
+
+	j = 0;
+	i = 0;
+	while (tab[i])
+	{
+		ft_putchar(tab[i]);
+		i++;
+		j++;
+		if (j == (int)len)
+		{
+			ft_putchar('\n');
+			j = 0;
+		}
+	}
 }

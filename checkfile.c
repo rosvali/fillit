@@ -13,7 +13,7 @@
 #include "libft/libft.h"
 #include "fillit.h"
 
-int		ft_count_maps(char *buff)
+int		count_maps(char *buff)
 {
 	int	maps;
 	int	count;
@@ -37,7 +37,7 @@ int		ft_count_maps(char *buff)
 	return (maps);
 }
 
-int		ft_check_blocs(char *buff)
+int		check_blocs(char *buff)
 {
 	int		i;
 	int		j;
@@ -66,20 +66,21 @@ int		ft_check_blocs(char *buff)
 	return (1);
 }
 
-int		ft_check_all_co_maps(char *buff)
+int		split_maps(char *buff)
 {
 	int		map;
 	int		y;
 	int		i;
 	char	*str;
 
-	map = ft_count_maps(buff);
+	map = count_maps(buff);
 	y = 0;
 	i = 0;
 	while (y < map)
 	{
-		str = ft_strsub(buff, i, 20);
-		if (ft_check_connection_blocs(str) == 0)
+		if (!(str = ft_strsub(buff, i, 20)))
+			return (0);
+		if (check_tetro(str) == 0)
 			return (0);
 		else
 		{
@@ -92,7 +93,7 @@ int		ft_check_all_co_maps(char *buff)
 	return (1);
 }
 
-char	*ft_read_file(int fd)
+char	*read_file(int fd)
 {
 	int				ret;
 	static char		buff[BUFF_SIZE + 1];
@@ -102,13 +103,13 @@ char	*ft_read_file(int fd)
 	return (buff);
 }
 
-int		ft_check_file(char *buff)
+int		checking(char *buff)
 {
-	if (ft_check_maps(buff) == 0)
+	if (check_maps(buff) == 0)
 		return (0);
-	if (ft_check_blocs(buff) == 0)
+	if (check_blocs(buff) == 0)
 		return (0);
-	if (ft_check_all_co_maps(buff) == 0)
+	if (split_maps(buff) == 0)
 		return (0);
 	return (1);
 }
