@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: raguillo <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/14 16:20:24 by raguillo          #+#    #+#              #
-#    Updated: 2019/03/14 16:20:26 by raguillo         ###   ########.fr        #
+#    Updated: 2019/04/01 18:55:03 by kwatanab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,12 @@ SRCS = main.c\
 		checkfile_2.c\
 		stock_tetro.c\
 		backtracking.c\
-		final_tab.c
+		map_shifter.c\
+		place.c\
+		can_place.c\
+		final_tab.c\
+		free_list.c\
+		delete.c
 
 OBJECTS = $(SRCS:.c=.o)
 

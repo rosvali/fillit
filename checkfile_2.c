@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkfile_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raguillo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 17:12:13 by raguillo          #+#    #+#             */
-/*   Updated: 2019/03/08 17:12:15 by raguillo         ###   ########.fr       */
+/*   Updated: 2019/04/01 19:46:20 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		check_maps_next(char *buff, int *i, int *x, int *y)
 		*y = *y + 1;
 		*i = *i + 1;
 	}
-	else if (buff[*i] == '\0' && *x == 4)
+	else if (buff[*i] == '\n' && buff[*i + 1] == '\0' && *x == 4)
 		return (1);
 	else
 		return (0);
@@ -33,28 +33,28 @@ int		check_maps_next(char *buff, int *i, int *x, int *y)
 	return (2);
 }
 
-void	check_tetro_next(char **tab, int *x, int *y, int *count)
+void	check_tetro_next(char **tab, int x, int y, int *count)
 {
-	if (tab[*y][*x] == '#')
+	if (y < (int)ft_strlen_tab(tab) && x < (int)ft_strlen(tab[y]) && tab[y][x] == '#')
 	{
-		if (*y != 0)
+		if (y != 0)
 		{
-			if (tab[*y - 1][*x] != '\0' && tab[*y - 1][*x] == '#')
+			if (tab[y - 1][x] != '\0' && tab[y - 1][x] == '#')
 				*count = *count + 1;
 		}
-		if (*y != 3)
+		if (y != 3)
 		{
-			if (tab[*y + 1][*x] == '#' && tab[*y + 1][*x])
+			if (tab[y + 1][x] == '#' && tab[y + 1][x])
 				*count = *count + 1;
 		}
-		if (*x != 0)
+		if (x != 0)
 		{
-			if (tab[*y][*x - 1] == '#' && tab[*y][*x - 1])
+			if (tab[y][x - 1] == '#' && tab[y][x - 1])
 				*count = *count + 1;
 		}
-		if (*x != 3)
+		if (x != 3)
 		{
-			if (tab[*y][*x + 1] == '#' && tab[*y][*x + 1])
+			if (tab[y][x + 1] == '#' && tab[y][x + 1])
 				*count = *count + 1;
 		}
 	}
@@ -80,8 +80,10 @@ int		check_maps(char *buff)
 		}
 		if (check_maps_next(buff, &i, &x, &y) == 0)
 			return (0);
-		else if (check_maps_next(buff, &i, &x, &y) == 1)
+		else if (check_maps_next(buff, &i, &x, &y) == 1 && y == 4)
 			return (1);
+		else
+			return (0);
 	}
 	return (1);
 }
@@ -102,12 +104,13 @@ int		check_tetro(char *buff)
 	{
 		while (tab[y][x] != '\0')
 		{
-			check_tetro_next(tab, &x, &y, &count);
+			check_tetro_next(tab, x, y, &count);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
+	ft_free_tab((void **)tab);
 	if (count < 6)
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 18:08:23 by raguillo          #+#    #+#             */
-/*   Updated: 2019/03/25 19:44:25 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/04/01 19:07:25 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_tetro		*lstnew_tetro(char *buff, int len)
 
 	if (!(tetro = malloc(sizeof(t_tetro))))
 		return (NULL);
-	if(!(tetro->map = split_and_move(buff, len)))
+	if (!(tetro->map = split_and_move(buff, len)))
 		return (NULL);
 	tetro->next = NULL;
 	return (tetro);
@@ -64,4 +64,14 @@ t_tetro		*create_tetro(char *buff)
 		start -= 21;
 	}
 	return (t);
+}
+
+void		free_lst(t_tetro *t)
+{
+	while (t)
+	{
+		free(t->map);
+		t = t->next;
+	}
+	t = NULL;
 }

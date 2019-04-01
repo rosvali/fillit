@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 14:13:09 by raguillo          #+#    #+#             */
-/*   Updated: 2019/03/25 18:02:49 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/04/01 19:37:55 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int					split_maps(char *buff);
 
 int					check_tetro(char *buff);
 
-void				check_tetro_next(char **tab, int *x, int *y, int *count);
+void				check_tetro_next(char **tab, int x, int y, int *count);
 
 /*
 ** Stockage des maps
@@ -60,6 +60,12 @@ void				lstadd_tetro(t_tetro **alst, t_tetro *new);
 t_tetro				*lstnew_tetro(char *buff, int len);
 
 t_tetro				*create_tetro(char *buff);
+
+void				free_lst(t_tetro *t);
+
+void				tetrodel(t_tetro **alst);
+
+void				tetrodelone(t_tetro **alst);
 
 /*
 ** Fonctions du backtracking
@@ -81,6 +87,10 @@ int					can_place_sup(char *map, char *tab, int i);
 void				place(char *map, char *tab, char c, int i);
 
 void				place_sup(char *map, char *tab, char c, int i);
+
+void				delete_block(char *map, char *tab, char c, int i);
+
+void				delete_block_sup(char *map, char *tab, char c, int i);
 
 int					backtracking(t_tetro *t, char c, char *tab);
 

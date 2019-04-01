@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkfile.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raguillo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 14:12:47 by raguillo          #+#    #+#             */
-/*   Updated: 2019/03/12 14:15:22 by raguillo         ###   ########.fr       */
+/*   Updated: 2019/04/01 19:51:07 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		count_maps(char *buff)
 	{
 		if (buff[i] == '\n')
 			count++;
-		if (count == 5)
+		if (count == 5 && buff[i + 1])
 		{
 			maps++;
 			count = 0;
@@ -80,15 +80,12 @@ int		split_maps(char *buff)
 	{
 		if (!(str = ft_strsub(buff, i, 20)))
 			return (0);
-		if (check_tetro(str) == 0)
+		if (!check_tetro(str))
 			return (0);
-		else
-		{
-			ft_strclr(str);
-			free(str);
-			i = i + 21;
-			y++;
-		}
+		ft_strclr(str);
+		free(str);
+		i = i + 21;
+		y++;
 	}
 	return (1);
 }
