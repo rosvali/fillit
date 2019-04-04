@@ -3,85 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   can_place.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kwatanab <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: raguillo <raguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 20:36:34 by kwatanab          #+#    #+#             */
-/*   Updated: 2019/04/01 20:36:37 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/04/02 19:25:12 by raguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+int		can_place_2(char *map, char *tab, int *i, t_var *var)
+{
+	while (*i < (int)ft_strlen(tab) &&
+	tab[*i] && map[var->j] && var->j < var->len)
+	{
+		if (tab[*i] == '.' && map[var->j] == '#')
+		{
+			if (((*i) + 1) % (int)tab_len(tab) == 0 && map[var->j + 1] == '#')
+				return (0);
+			var->count++;
+			if (var->count == 4)
+				return (1);
+		}
+		(*i)++;
+		var->j++;
+	}
+	var->j += var->diff;
+	var->len += var->diff + var->len;
+	var->k++;
+	return (2);
+}
+
 int		can_place(char *map, char *tab, int i)
 {
-	int		len;
-	int		diff;
-	int		count;
-	int		j;
-	int		k;
+	t_var	var;
+	int		ret;
 
-	len = (int)tab_len(tab);
-	count = 0;
-	j = 0;
-	k = 0;
-	diff = 4 - len;
-	while (i < (int)ft_strlen(tab) && k < (int)tab_len(tab) && len <= 16)
+	var.len = (int)tab_len(tab);
+	var.count = 0;
+	var.j = 0;
+	var.k = 0;
+	var.diff = 4 - var.len;
+	while (i < (int)ft_strlen(tab) &&
+		var.k < (int)tab_len(tab) && var.len <= 16)
 	{
-		while (i < (int)ft_strlen(tab) && tab[i] && map[j] && j < len)
-		{
-			if (tab[i] == '.' && map[j] == '#')
-			{
-				if ((i + 1) % (int)tab_len(tab) == 0 && map[j + 1] == '#')
-					return (0);
-				count++;
-				if (count == 4)
-					return (1);
-			}
-			i++;
-			j++;
-		}
-		j += diff;
-		len += diff + len;
-		k++;
+		ret = can_place_2(map, tab, &i, &var);
+		if (ret == 0)
+			return (0);
+		if (ret == 1)
+			return (1);
 	}
 	return (0);
 }
 
+int		can_place_sup_2(char *map, char *tab, int *i, t_var *var)
+{
+	while (*i < (int)ft_strlen(tab) && var->lim < 4)
+	{
+		if (tab[*i] == '.' && map[var->j] == '#')
+		{
+			if ((*i + 1) % (int)tab_len(tab) == 0 && map[var->j + 1] == '#')
+				return (0);
+			var->count++;
+			if (var->count == 4)
+				return (1);
+		}
+		*i = *i + 1;
+		var->j++;
+		var->lim++;
+	}
+	return (2);
+}
+
 int		can_place_sup(char *map, char *tab, int i)
 {
-	int		len;
-	int		diff;
-	int		count;
-	int		lim;
-	int		j;
-	int		k;
+	t_var	var;
+	int		ret;
 
-	len = 4;
-	count = 0;
-	j = 0;
-	k = 0;
-	lim = 0;
-	diff = (int)tab_len(tab) - 4;
-	while (i < (int)ft_strlen(tab) && k < 4 && len <= (int)ft_strlen(tab))
+	var.len = 4;
+	var.count = 0;
+	var.j = 0;
+	var.k = 0;
+	var.lim = 0;
+	while (i < (int)ft_strlen(tab) &&
+		var.k < 4 && var.len <= (int)ft_strlen(tab))
 	{
-		while (i < (int)ft_strlen(tab) && lim < 4)
-		{
-			if (tab[i] == '.' && map[j] == '#')
-			{
-				if ((i + 1) % (int)tab_len(tab) == 0 && map[j + 1] == '#')
-					return (0);
-				count++;
-				if (count == 4)
-					return (1);
-			}
-			i++;
-			j++;
-			lim++;
-		}
-		i += diff;
-		len += diff + 4;
-		k++;
-		lim = 0;
+		ret = can_place_sup_2(map, tab, &i, &var);
+		if (ret == 0)
+			return (0);
+		if (ret == 1)
+			return (1);
+		i += (int)tab_len(tab) - 4;
+		var.len += (int)tab_len(tab) - 4 + 4;
+		var.k++;
+		var.lim = 0;
 	}
 	return (0);
 }

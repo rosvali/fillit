@@ -6,12 +6,11 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 14:41:34 by kwatanab          #+#    #+#             */
-/*   Updated: 2019/03/30 14:42:19 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/04/03 19:29:13 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 void	tetro_shift(char *piece, size_t n)
 {

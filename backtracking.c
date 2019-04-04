@@ -6,12 +6,11 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 14:38:43 by kwatanab          #+#    #+#             */
-/*   Updated: 2019/04/01 18:59:28 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/04/03 19:26:56 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 char	*grow_and_solve(t_tetro *t)
 {
@@ -33,6 +32,27 @@ char	*grow_and_solve(t_tetro *t)
 	return (tab);
 }
 
+int		backtracking_main(t_tetro *t, char c, char *tab, int i)
+{
+	if (ft_strlen(tab) <= 16)
+	{
+		if (can_place(t->map, tab, i) == 1)
+		{
+			place(t->map, tab, c, i);
+			return (1);
+		}
+	}
+	else
+	{
+		if (can_place_sup(t->map, tab, i) == 1)
+		{
+			place_sup(t->map, tab, c, i);
+			return (1);
+		}
+	}
+	return (0);
+}
+
 int		backtracking(t_tetro *t, char c, char *tab)
 {
 	int		i;
@@ -45,33 +65,18 @@ int		backtracking(t_tetro *t, char c, char *tab)
 		if ((tab[i] != '.' && tab[i + 1] && tab[i + 1] != '.' && tab[i + 2] &&
 		tab[i + 2] == '.') || (tab[i] != '.' && tab[i + 1] && tab[i + 1] == '.')
 		|| tab[i] == '.')
-			backtracking_2(t, c, tab, i);
+		{
+			if (backtracking_main(t, c, tab, i) == 1)
+			{
+				if (backtracking(t->next, (c + 1), tab))
+					return (1);
+				if (ft_strlen(tab) <= 16)
+					delete_block(t->map, tab, '.', i);
+				else
+					delete_block_sup(t->map, tab, '.', i);
+			}
+		}
 		i++;
 	}
 	return (0);
-}
-
-void	backtracking_2(t_tetro *t, char c, char *tab, int i)
-{
-	if (ft_strlen(tab) <= 16)
-	{
-		if (can_place(t->map, tab, i) == 1)
-		{
-			place(t->map, tab, c, i);
-			if (backtracking(t->next, (c + 1), tab))
-				return (1);
-			else
-				delete_block(t->map, tab, '.', i);
-		}
-	else
-	{
-		if (can_place_sup(t->map, tab, i) == 1)
-		{
-			place_sup(t->map, tab, c, i);
-			if (backtracking(t->next, (c + 1), tab))
-				return (1);
-			else
-				delete_block_sup(t->map, tab, '.', i);
-		}
-	}
 }

@@ -6,11 +6,10 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 14:12:47 by raguillo          #+#    #+#             */
-/*   Updated: 2019/04/01 19:51:07 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/04/03 19:27:21 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "fillit.h"
 
 int		count_maps(char *buff)
@@ -107,6 +106,8 @@ int		checking(char *buff)
 	if (check_blocs(buff) == 0)
 		return (0);
 	if (split_maps(buff) == 0)
+		return (0);
+	if (count_maps(buff) > 26)
 		return (0);
 	return (1);
 }

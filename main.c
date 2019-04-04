@@ -6,15 +6,13 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 14:02:31 by raguillo          #+#    #+#             */
-/*   Updated: 2019/04/01 19:22:03 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/04/03 19:50:20 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "fillit.h"
-#include <stdio.h>
 
-void		solver(char *buff)
+void	solver(char *buff)
 {
 	t_tetro *tetro;
 	char	*tab;
@@ -37,7 +35,7 @@ int		main(int argc, char **argv)
 	i = 0;
 	if (argc != 2)
 	{
-		write(1, "usage: ./fillit source_file.fillit\n", 35);
+		ft_putstr("usage: fillit input_file\n");
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);

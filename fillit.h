@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 14:13:09 by raguillo          #+#    #+#             */
-/*   Updated: 2019/04/01 19:37:55 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/04/03 19:28:19 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,18 @@ typedef struct		s_tetro
 	struct s_tetro	*next;
 }					t_tetro;
 
+typedef struct		s_var
+{
+	int		len;
+	int		diff;
+	int		j;
+	int		k;
+	int		count;
+	int		lim;
+}					t_var;
+
 /*
 ** Validité du fichier
-** checkfile.c checkfile_2.c
 */
 
 char				*read_file(int fd);
@@ -50,7 +59,6 @@ void				check_tetro_next(char **tab, int x, int y, int *count);
 
 /*
 ** Stockage des maps
-** stock_tetro.c
 */
 
 char				*split_and_move(char *buff, int start);
@@ -69,7 +77,6 @@ void				tetrodelone(t_tetro **alst);
 
 /*
 ** Fonctions du backtracking
-** backtracking.c
 */
 
 void				tetro_shift(char *piece, size_t n);
@@ -82,7 +89,11 @@ char				*grow_and_solve(t_tetro *t);
 
 int					can_place(char *map, char *tab, int i);
 
+int					can_place_2(char *map, char *tab, int *i, t_var *var);
+
 int					can_place_sup(char *map, char *tab, int i);
+
+int					can_place_sup_2(char *map, char *tab, int *i, t_var *var);
 
 void				place(char *map, char *tab, char c, int i);
 
@@ -96,7 +107,6 @@ int					backtracking(t_tetro *t, char c, char *tab);
 
 /*
 ** Création du tableau
-** final_tab.c
 */
 
 char				*create_final_tab(int *count);
@@ -109,7 +119,6 @@ void				print_tab(char *tab, size_t len);
 
 /*
 ** Test
-** test.c
 */
 
 void				ft_print_put_map_in_str(char *map);

@@ -6,12 +6,11 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 15:42:44 by kwatanab          #+#    #+#             */
-/*   Updated: 2019/04/01 19:24:56 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/04/03 19:28:31 by kwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 char	*create_final_tab(int *count)
 {
