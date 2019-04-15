@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 14:02:31 by raguillo          #+#    #+#             */
-/*   Updated: 2019/04/03 19:50:20 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/04/08 16:28:26 by raguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ int		main(int argc, char **argv)
 		ft_putstr("usage: fillit input_file\n");
 		return (0);
 	}
-	fd = open(argv[1], O_RDONLY);
+	if ((fd = open(argv[1], O_RDONLY)) == -1)
+	{
+		write(1, "error\n", 6);
+		return (0);
+	}
 	buff = read_file(fd);
 	if (checking(buff) == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: kwatanab <kwatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 14:13:09 by raguillo          #+#    #+#             */
-/*   Updated: 2019/04/03 19:28:19 by kwatanab         ###   ########.fr       */
+/*   Updated: 2019/04/08 16:25:12 by raguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,4 @@ char				*delete_nl(char *map);
 size_t				tab_len(char *tab);
 
 void				print_tab(char *tab, size_t len);
-
-/*
-** Test
-*/
-
-void				ft_print_put_map_in_str(char *map);
-
-void				ft_print_create_tetro(t_tetro *t);
 #endif
